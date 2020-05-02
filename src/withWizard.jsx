@@ -12,19 +12,28 @@
  * the License.
  */
 
-import renderCallback from '../utils/renderCallback';
-import wizardShape from '../wizardShape';
+import React from 'react';
+import hoistStatics from 'hoist-non-react-statics';
+import useWizard from './hooks/useWizard';
 
-const createWizardComponent = name => {
-  const WizardComponent = (props, { wizard: { init, ...wizard } }) => renderCallback(props, wizard);
+import wizardShape from './wizardShape';
 
-  WizardComponent.contextTypes = {
+const withWizard = Component => {
+  const WithWizard = props => {
+    const wizard = useWizard();
+
+    /* eslint-disable-next-line react/jsx-props-no-spreading */
+    return <Component wizard={wizard} {...props} />;
+  };
+
+  WithWizard.contextTypes = {
     wizard: wizardShape,
   };
 
-  WizardComponent.displayName = name;
+  WithWizard.displayName = `withWizard(${Component.displayName || Component.name})`;
+  WithWizard.WrappedComponent = Component;
 
-  return WizardComponent;
+  return hoistStatics(WithWizard, Component);
 };
 
-export default createWizardComponent;
+export default withWizard;
