@@ -100,9 +100,11 @@ describe("Wizard", () => {
     });
 
     it("call onNext and go to the next step", () => {
-      const { onNext } = wizard;
+      const { onNext, push } = wizard;
       act(() => onNext());
-      expect(onWizardNext).toHaveBeenCalled();
+      expect(onNext).not.toHaveBeenCalled();
+      push();
+      expect(onNext).toHaveBeenCalled();
       expect(wizard.step).toEqual({ id: "slytherin" });
     });
   });
