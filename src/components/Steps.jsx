@@ -1,9 +1,11 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
+import { OnInitContext } from "./Wizard";
 import useWizard from "../hooks/useWizard";
 
 const Steps = ({ step, children: childSteps }) => {
-  const { step: wizardStep, onInit } = useWizard();
+  const { step: wizardStep } = useWizard();
+  const setSteps = useContext(OnInitContext);
 
   useEffect(() => {
     const steps = React.Children.map(childSteps, child => {
@@ -13,7 +15,7 @@ const Steps = ({ step, children: childSteps }) => {
       return config;
     });
 
-    onInit(steps);
+    setSteps(steps);
   }, []);
 
   const { id: activeId } = step || wizardStep;

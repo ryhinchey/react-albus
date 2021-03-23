@@ -2,12 +2,11 @@ import React from "react";
 import { useWizard } from "react-albus";
 
 const Navigation = () => {
-  const { onNext, onPrevious, hasNext, hasPrevious } = useWizard();
-
+  const { next, previous, hasNext, hasPrevious } = useWizard();
   return (
     <div className="example-buttons">
       {hasNext && (
-        <button type="button" className="btn-fluid margin-1-b" onClick={onNext}>
+        <button type="button" className="btn-fluid margin-1-b" onClick={next}>
           Next
         </button>
       )}
@@ -15,7 +14,7 @@ const Navigation = () => {
         <button
           type="button"
           className="btn-fluid btn-secondary"
-          onClick={onPrevious}
+          onClick={previous}
         >
           Back
         </button>

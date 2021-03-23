@@ -38,10 +38,10 @@ function useHistory({ steps, basename, history, exactMatch }) {
   };
 
   return {
-    ...historyRef.current,
     pathname: activePath,
     push: handleNext(historyRef.current.push),
-    replace: handleNext(historyRef.current.replace)
+    replace: handleNext(historyRef.current.replace),
+    goBack: historyRef.current.goBack
   };
 }
 

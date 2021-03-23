@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Wizard, Steps, Step } from "react-albus";
 import { Line } from "rc-progress";
-import Navigation from "./Navigation";
+import Navigation from "../Navigation";
 import "./exampleAnimation.css";
 
 const skip = ({ step, push }) => {

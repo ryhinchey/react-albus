@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Wizard, Steps, Step } from "react-albus";
-import Navigation from "./Navigation";
+import Navigation from "../Navigation";
 
 const AddRouting = () => (
   <BrowserRouter>

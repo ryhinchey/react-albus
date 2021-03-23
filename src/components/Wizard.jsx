@@ -4,6 +4,8 @@ import useHistory from "../hooks/useHistory";
 import historyShape from "../historyShape";
 import WizardContext from "../wizardContext";
 
+export const OnInitContext = React.createContext();
+
 const Wizard = ({ children, basename, history, exactMatch, onNext }) => {
   const [steps, setSteps] = useState([]);
 
@@ -41,17 +43,17 @@ const Wizard = ({ children, basename, history, exactMatch, onNext }) => {
   const context = {
     step,
     steps,
-    onNext: handleNext,
-    onPrevious: wizardHistory.goBack,
-    onInit: setSteps,
+    next: handleNext,
+    previous: wizardHistory.goBack,
     hasNext: indexOfStep < steps.length - 1,
-    hasPrevious: indexOfStep > 0,
-    ...wizardHistory
+    hasPrevious: indexOfStep > 0
   };
 
   return (
     <WizardContext.Provider value={context}>
-      {typeof children === "function" ? children(context) : children}
+      <OnInitContext.Provider value={setSteps}>
+        {typeof children === "function" ? children(context) : children}
+      </OnInitContext.Provider>
     </WizardContext.Provider>
   );
 };
