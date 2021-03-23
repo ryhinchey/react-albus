@@ -16,7 +16,7 @@ const Steps = ({ step, children: childSteps }) => {
     });
 
     setSteps(steps);
-  }, []);
+  }, [childSteps]);
 
   const { id: activeId } = step || wizardStep;
   const [child = null] = React.Children.toArray(childSteps).filter(
